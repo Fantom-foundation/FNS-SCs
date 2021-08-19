@@ -17,7 +17,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
   if (network.tags.legacy) {
     const baseContract = await deploy('BaseRegistrarImplementation', {
       from: deployer,
-      args: [registry.address, namehash.hash('eth')],
+      args: [registry.address, namehash.hash('ftm')],
       log: true,
       contract: await deployments.getArtifact('BaseRegistrarImplementation')
     });
@@ -27,7 +27,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }) => {
 
     await deploy('ETHRegistrarController', {
       from: deployer,
-      args: [baseContract.address, priceOracle.address, 600, 86400],
+      args: [baseContract.address, priceOracle.address, 60, 86400],
       log: true,
       contract: await deployments.getArtifact('ETHRegistrarController')
     });
